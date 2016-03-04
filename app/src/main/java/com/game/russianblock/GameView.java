@@ -19,6 +19,7 @@ import java.util.TimerTask;
 /**
  * Created by Administrator on 2016-01-26.
  * @author QiaoJiadong
+ * add a comment test.
  */
 public class GameView extends Activity implements View.OnClickListener {
 
