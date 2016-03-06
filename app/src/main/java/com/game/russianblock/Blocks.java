@@ -34,7 +34,6 @@ public class Blocks extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawColor(Color.LTGRAY);
 
         switch(mRandomInt) {
             case GameConstants.O:
@@ -133,6 +132,9 @@ public class Blocks extends View {
                 if(mDegree%2 != 0) {
                     translateToX = -99;
                     translateToY = 99;
+                } else {
+                    translateToX = 0;
+                    translateToY = 0;
                 }
                 break;
             case GameConstants.Z:
@@ -143,6 +145,9 @@ public class Blocks extends View {
                 if(mDegree%2 != 0) {
                     translateToX = -33;
                     translateToY = 33;
+                } else {
+                    translateToX = 0;
+                    translateToY = 0;
                 }
                 break;
         }
