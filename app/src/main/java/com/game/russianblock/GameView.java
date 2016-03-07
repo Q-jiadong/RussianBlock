@@ -27,9 +27,9 @@ public class GameView extends Activity implements View.OnClickListener {
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
     private Blocks mIndicator;
-    private int mBlockWidth;
     private int mGamePoolWidth;
     private int mDegree = 0;
+    private int mGameOneStep;
     private int mRandomInt = 0;
     private boolean gameStarted = false;
     private static final int TIMER_TICK = 0;
@@ -55,6 +55,7 @@ public class GameView extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_main_layout);
 
+        //init buttons and view.
         mLeftBtn = (ShapeButton)findViewById(R.id.left_button);
         mDownBtn = (ShapeButton)findViewById(R.id.down_button);
         mRightBtn = (ShapeButton)findViewById(R.id.right_button);
@@ -71,14 +72,11 @@ public class GameView extends Activity implements View.OnClickListener {
         mSurfaceView.setOnClickListener(this);
         mIndicator.setOnClickListener(this);
 
+        //init game parameters
         mGamePoolWidth = getResources().getDimensionPixelOffset(R.dimen.game_pool_width);
-        mBlockWidth = getResources().getDimensionPixelOffset(R.dimen.a_block_width);
-
+        mGameOneStep = getResources().getDimensionPixelOffset(R.dimen.a_block_width);
 
         mSurfaceHolder = mSurfaceView.getHolder();
-
-        mScore = (TextView)findViewById(R.id.score);
-
     }
 
     @Override
