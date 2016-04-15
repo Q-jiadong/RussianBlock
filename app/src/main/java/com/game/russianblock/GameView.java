@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -20,35 +21,23 @@ import java.util.TimerTask;
  * Created by Administrator on 2016-01-26.
  * @author QiaoJiadong
  */
-public class GameView extends Activity implements View.OnClickListener {
+public class GameView extends Activity implements View.OnTouchListener {
 
     private ShapeButton mLeftBtn, mRightBtn, mDownBtn, mRotateBtn;
     private TextView mScore;
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
-    private Blocks mIndicator;
+    private GameHandler mHandler = null;
+
     private int mBlockWidth;
     private int mGamePoolWidth;
     private int mDegree = 0;
-    private int mRandomInt = 0;
     private boolean gameStarted = false;
-    private static final int TIMER_TICK = 0;
 
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    mIndicator.setRandomInt(mRandomInt);
-                    int rand = new Random().nextInt(7);
-                    mIndicator.rotateClockwise(rand);
-                    Toast.makeText(getApplicationContext(), "rotate: " + rand + " shape: " + mRandomInt, Toast.LENGTH_SHORT).show();
-                    mIndicator.invalidate();
-                    mIndicator.requestLayout();
-                    break;
-            }
-        }
-    };
+    public static Blocks mIndicator;
+    public static Blocks mGameBlock;
+    public static int mRandomInt = 0;
+    private static final int TIMER_TICK = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,13 +52,14 @@ public class GameView extends Activity implements View.OnClickListener {
         mScore = (TextView)findViewById(R.id.score);
         mSurfaceView = (SurfaceView)findViewById(R.id.game_pool);
         mIndicator = (Blocks)findViewById(R.id.indicator);
+        mGameBlock = (Blocks)findViewById(R.id.game_blocks);
 
-        mLeftBtn.setOnClickListener(this);
-        mDownBtn.setOnClickListener(this);
-        mRightBtn.setOnClickListener(this);
-        mRotateBtn.setOnClickListener(this);
-        mSurfaceView.setOnClickListener(this);
-        mIndicator.setOnClickListener(this);
+        mLeftBtn.setOnTouchListener(this);
+        mDownBtn.setOnTouchListener(this);
+        mRightBtn.setOnTouchListener(this);
+        mRotateBtn.setOnTouchListener(this);
+        mSurfaceView.setOnTouchListener(this);
+        mIndicator.setOnTouchListener(this);
 
         mGamePoolWidth = getResources().getDimensionPixelOffset(R.dimen.game_pool_width);
         mBlockWidth = getResources().getDimensionPixelOffset(R.dimen.a_block_width);
@@ -78,6 +68,8 @@ public class GameView extends Activity implements View.OnClickListener {
         mSurfaceHolder = mSurfaceView.getHolder();
 
         mScore = (TextView)findViewById(R.id.score);
+
+        mHandler = new GameHandler(this);
 
     }
 
@@ -97,15 +89,16 @@ public class GameView extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onTouch(View v, MotionEvent event) {
         switch(v.getId()) {
             case R.id.game_pool:
             case R.id.indicator:
-                if(! gameStarted) {
+                //if(! gameStarted) {
                     //startGame();
-                }
-                getRandomInt();
-                mHandler.sendEmptyMessage(0);
+                //}
+                //getRandomInt();
+                //mHandler.sendEmptyMessage(0);
+                Toast.makeText(getApplicationContext(), "indicator", Toast.LENGTH_LONG).show();
                 break;
             case R.id.left_button:
                 break;
@@ -114,8 +107,13 @@ public class GameView extends Activity implements View.OnClickListener {
             case R.id.down_button:
                 break;
             case R.id.rotate_button:
+                Toast.makeText(getApplicationContext(), "onRotate()", Toast.LENGTH_LONG).show();
+                mHandler.sendEmptyMessage(GameConstants.MSG_ROTATE);
+                break;
+            default:
                 break;
         }
+        return false;
     }
 
     public void startGame() {
@@ -125,10 +123,10 @@ public class GameView extends Activity implements View.OnClickListener {
         gameStarted = true;
     }
 
-    public void getRandomInt() {
+    public int getRandomInt() {
         int arr[] = {0, 1, 2, 3, 3, 4, 5, 6, 6, 6};
         Random rand = new Random();
-        mRandomInt = arr[rand.nextInt(9)];
+        return arr[rand.nextInt(9)];
     }
 
     public void BlocksArrived(View v) {
@@ -142,8 +140,8 @@ public class GameView extends Activity implements View.OnClickListener {
     class GameTimeTask extends TimerTask {
         @Override
         public void run() {
-            getRandomInt();
-            mHandler.sendEmptyMessage(0);
+            //getRandomInt();
+            //GameHandler.mHandler.sendEmptyMessage(0);
         }
     }
 }

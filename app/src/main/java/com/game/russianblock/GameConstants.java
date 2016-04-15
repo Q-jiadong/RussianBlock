@@ -18,4 +18,10 @@ public class GameConstants {
     public static final int L = 4;
     public static final int J = 5;
     public static final int T = 6;
+
+    //message
+    public static final int MSG_START = 101;
+    public static final int MSG_PAUSE = 102;
+    public static final int MSG_STOP = 103;
+    public static final int MSG_ROTATE= 104;
 }
