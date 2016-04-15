@@ -28,19 +28,13 @@ public class GameView extends Activity implements View.OnTouchListener {
     private TextView mScore;
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
-<<<<<<< HEAD
     private GameHandler mHandler = null;
 
     private int mBlockWidth;
     private int mGamePoolWidth;
     private int mDegree = 0;
-=======
-    private Blocks mIndicator;
-    private int mGamePoolWidth;
-    private int mDegree = 0;
     private int mGameOneStep;
-    private int mRandomInt = 0;
->>>>>>> e4f4c6db65a53ef62c07bf7ddc84c61c27aabced
+
     private boolean gameStarted = false;
 
     public static Blocks mIndicator;
@@ -76,14 +70,10 @@ public class GameView extends Activity implements View.OnTouchListener {
         mGameOneStep = getResources().getDimensionPixelOffset(R.dimen.a_block_width);
 
         mSurfaceHolder = mSurfaceView.getHolder();
-<<<<<<< HEAD
 
         mScore = (TextView)findViewById(R.id.score);
 
         mHandler = new GameHandler(this);
-
-=======
->>>>>>> e4f4c6db65a53ef62c07bf7ddc84c61c27aabced
     }
 
     @Override
