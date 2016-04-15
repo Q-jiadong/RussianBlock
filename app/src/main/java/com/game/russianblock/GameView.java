@@ -20,6 +20,7 @@ import java.util.TimerTask;
 /**
  * Created by Administrator on 2016-01-26.
  * @author QiaoJiadong
+ * add a comment test.
  */
 public class GameView extends Activity implements View.OnTouchListener {
 
@@ -27,11 +28,19 @@ public class GameView extends Activity implements View.OnTouchListener {
     private TextView mScore;
     private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
+<<<<<<< HEAD
     private GameHandler mHandler = null;
 
     private int mBlockWidth;
     private int mGamePoolWidth;
     private int mDegree = 0;
+=======
+    private Blocks mIndicator;
+    private int mGamePoolWidth;
+    private int mDegree = 0;
+    private int mGameOneStep;
+    private int mRandomInt = 0;
+>>>>>>> e4f4c6db65a53ef62c07bf7ddc84c61c27aabced
     private boolean gameStarted = false;
 
     public static Blocks mIndicator;
@@ -44,6 +53,7 @@ public class GameView extends Activity implements View.OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_main_layout);
 
+        //init buttons and view.
         mLeftBtn = (ShapeButton)findViewById(R.id.left_button);
         mDownBtn = (ShapeButton)findViewById(R.id.down_button);
         mRightBtn = (ShapeButton)findViewById(R.id.right_button);
@@ -61,16 +71,19 @@ public class GameView extends Activity implements View.OnTouchListener {
         mSurfaceView.setOnTouchListener(this);
         mIndicator.setOnTouchListener(this);
 
+        //init game parameters
         mGamePoolWidth = getResources().getDimensionPixelOffset(R.dimen.game_pool_width);
-        mBlockWidth = getResources().getDimensionPixelOffset(R.dimen.a_block_width);
-
+        mGameOneStep = getResources().getDimensionPixelOffset(R.dimen.a_block_width);
 
         mSurfaceHolder = mSurfaceView.getHolder();
+<<<<<<< HEAD
 
         mScore = (TextView)findViewById(R.id.score);
 
         mHandler = new GameHandler(this);
 
+=======
+>>>>>>> e4f4c6db65a53ef62c07bf7ddc84c61c27aabced
     }
 
     @Override
